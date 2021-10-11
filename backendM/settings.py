@@ -38,9 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #others
-    # 'rest_framework',
+    #rest_framework
+    'rest_framework',
+    #local
     'employee',
+    'products',
+    'providers',
+    'orders',
+    #management application
+    'management.apps.ManagementConfig',
+    #CORS
+    'corsheaders',
 
 ]
 
@@ -52,7 +60,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #CORS
+    'corsheaders.middleware.CorsMiddleware',
+   
 ]
+CORS_ORIGIN_ALLOW_ALL=False
+CORS_ORIGIN_WHITELIST=(
+    'http://localhost:8081',
+    'http://localhost:3006'
+)
 
 ROOT_URLCONF = 'backendM.urls'
 
@@ -132,3 +148,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
