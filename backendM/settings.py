@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 
+from django.utils.module_loading import import_string
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -63,6 +65,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #CORS
     'corsheaders.middleware.CorsMiddleware',
+    #whitenoises
+    'whitenoise.middleware.WhiteNoiseMiddleware',
    
 ]
 CORS_ORIGIN_ALLOW_ALL=False
@@ -94,17 +98,25 @@ WSGI_APPLICATION = 'backendM.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+import dj_database_url
+from decouple import config
+DATABASES={
+    'default':dj_database_url.config(
+        default=config('DATABASE_URL')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Inventory',
-        'USER': 'root',
-        'PASSWORD': '1465Rafael*',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
+    )
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'Inventory',
+#         'USER': 'root',
+#         'PASSWORD': '1465Rafael*',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
 
 
 # Password validation
@@ -145,7 +157,7 @@ USE_TZ = True
 STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
 
-STATICFILES_DIR=(
+STATICFILES_DIRS=(
     os.path.join(BASE_DIR,'static')
 )
 
@@ -153,4 +165,6 @@ STATICFILES_DIR=(
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILE_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
