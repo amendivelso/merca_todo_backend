@@ -102,7 +102,7 @@ import dj_database_url
 from decouple import config
 DATABASES={
     'default':dj_database_url.config(
-        default=config('CLEARDB_DATABASE_URL')
+        default=config('DATABASE_URL')
 
     )
 }
