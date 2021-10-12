@@ -107,16 +107,7 @@ DATABASES={
     )
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'Inventory',
-#         'USER': 'root',
-#         'PASSWORD': '1465Rafael*',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#     }
-# }
+
 
 
 # Password validation
